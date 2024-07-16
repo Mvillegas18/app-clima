@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { countries } from '../../data';
-import { SearchType } from '../../types';
+import { type SearchType } from '../../types';
 import styles from './Form.module.css';
 
 type FormTypes = {
