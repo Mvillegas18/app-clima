@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import Alert from '../../alert/Alert';
 import { countries } from '../../data';
 import { type SearchType } from '../../types';
 import styles from './Form.module.css';
@@ -19,7 +20,11 @@ export default function Form({ fetchWeather }: FormTypes) {
 		event: React.FormEvent<HTMLFormElement> | ChangeEvent<HTMLSelectElement>
 	) => {
 		event.preventDefault();
-		console.log('Formulario enviado');
+		if (Object.values(search).includes('')) {
+			setAlert('Todos los campos son obligatorios');
+		}
+
+		fetchWeather();
 	};
 
 	const handleChange = (
@@ -30,7 +35,7 @@ export default function Form({ fetchWeather }: FormTypes) {
 		<form
 			className={styles.form}
 			onSubmit={handleSubmit}>
-{alert && <Alert>{alert}</Alert>}
+			{alert && <Alert>{alert}</Alert>}
 
 			<div className={styles.field}>
 				<label htmlFor='city'>Ciudad:</label>
