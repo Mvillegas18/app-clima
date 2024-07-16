@@ -8,13 +8,19 @@
 .form input[type="text"],
 .form select {
   padding: 1rem;
-  background-color: transparent;
+  background: transparent;
   border: .3rem solid var(--white);
   color: var(--white);
   font-size: 1.8rem;
   font-weight: 400;
   border-radius: 1rem;
 }
+
+.form select option {
+  background-color: #1C1D21;
+  color: var(--white);
+}
+
 
 .field ::placeholder {
   color: var(--white);
@@ -29,8 +35,5 @@
   text-transform: uppercase;
   cursor: pointer;
   padding: 1rem;
+  border-radius: .5rem;
 }
-
-/* .submit:hover {
-  background-color: ;
-} */
