@@ -30,6 +30,8 @@ export default function Form({ fetchWeather }: FormTypes) {
 		<form
 			className={styles.form}
 			onSubmit={handleSubmit}>
+{alert && <Alert>{alert}</Alert>}
+
 			<div className={styles.field}>
 				<label htmlFor='city'>Ciudad:</label>
 				<input
