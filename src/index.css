@@ -1,6 +1,10 @@
 :root {
-  --white: #fff;
-  --primary: #f59e0b
+  --white: #F4F1DE;
+  /* #fff */
+  --primary: #E07A5F
+    /* #f59e0b */
+    /* #E07A5F */
+    /* #F2CC8F */
 }
 
 html {
