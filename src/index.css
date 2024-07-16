@@ -1,10 +1,11 @@
 :root {
   --white: #F4F1DE;
   /* #fff */
-  --primary: #E07A5F
-    /* #f59e0b */
-    /* #E07A5F */
-    /* #F2CC8F */
+  --primary: #E07A5F;
+  /* #f59e0b */
+  /* #E07A5F */
+  /* #F2CC8F */
+  --error: #ef4444
 }
 
 html {
