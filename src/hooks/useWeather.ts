@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import axios from 'axios';
 import { SearchType } from '../types';
 
@@ -12,6 +13,18 @@ import { SearchType } from '../types';
 // 			typeof (weather as Weather).main.temp_min === 'number'
 // 	);
 // }
+
+// zod
+const Weather = z.object({
+	name: z.string(),
+	main: z.object({
+		temp: z.number(),
+		temp_max: z.number(),
+		temp_min: z.number(),
+	}),
+});
+
+type Weather = z.infer<typeof Weather>;
 
 export default function useWeather() {
 	const fetchWeather = async (search: SearchType) => {
