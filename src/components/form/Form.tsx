@@ -5,7 +5,7 @@ import { type SearchType } from '../../types';
 import styles from './Form.module.css';
 
 type FormTypes = {
-	fetchWeather: () => void;
+	fetchWeather: (search: SearchType) => Promise<void>;
 };
 
 export default function Form({ fetchWeather }: FormTypes) {
@@ -24,7 +24,7 @@ export default function Form({ fetchWeather }: FormTypes) {
 			setAlert('Todos los campos son obligatorios');
 		}
 
-		fetchWeather();
+		fetchWeather(search);
 	};
 
 	const handleChange = (
