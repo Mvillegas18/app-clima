@@ -1,8 +1,14 @@
-import { z } from 'zod';
 import axios from 'axios';
+import { useState } from 'react';
+import { z } from 'zod';
 import { SearchType } from '../types';
 
-// TYPE GUARD
+// Castear el type
+// const { data: weatherResult } = await axios(weatherUrl);
+// console.log(weatherResult.temp);
+// console.log(weatherResult.name);
+
+// TYPE GUARDS
 // function isWeatherResponse(weather: unknown): weather is Weather {
 // 	return Boolean(
 // 		weather &&
@@ -23,10 +29,28 @@ const Weather = z.object({
 		temp_min: z.number(),
 	}),
 });
-
 type Weather = z.infer<typeof Weather>;
 
+// const WeatherSchema = object({
+// 	name: string(),
+// 	main: object({
+// 		temp: number(),
+// 		temp_max: number(),
+// 		temp_min: number(),
+// 	}),
+// });
+// type Weather = InferOutput<typeof WeatherSchema>;
+
 export default function useWeather() {
+	const [weather, setWeather] = useState<Weather>({
+		name: '',
+		main: {
+			temp: 0,
+			temp_max: 0,
+			temp_min: 0,
+		},
+	});
+
 	const fetchWeather = async (search: SearchType) => {
 		const appId = import.meta.env.VITE_API_KEY;
 		try {
@@ -45,6 +69,19 @@ export default function useWeather() {
 			// console.log(result);
 
 			// Implementation ZOD
+			const { data: weatherResult } = await axios(weatherUrl);
+			const result = Weather.safeParse(weatherResult);
+
+			if (result.success) {
+				setWeather(result.data);
+			}
+
+			// Valibot
+			// const { data: weatherResult } = await axios(weatherUrl);
+			// const result = parse(WeatherSchema, weatherResult);
+			// if (result) {
+			// 	console.log(result.name);
+			// }
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,5 +89,6 @@ export default function useWeather() {
 
 	return {
 		fetchWeather,
+		weather,
 	};
 }
