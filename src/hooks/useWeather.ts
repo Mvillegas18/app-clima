@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { z } from 'zod';
 import { SearchType } from '../types';
 
@@ -29,7 +29,7 @@ const Weather = z.object({
 		temp_min: z.number(),
 	}),
 });
-type Weather = z.infer<typeof Weather>;
+export type Weather = z.infer<typeof Weather>;
 
 // const WeatherSchema = object({
 // 	name: string(),
@@ -87,8 +87,11 @@ export default function useWeather() {
 		}
 	};
 
+	const hasWeatherData = useMemo(() => weather.name, [weather]);
+
 	return {
 		fetchWeather,
+		hasWeatherData,
 		weather,
 	};
 }
